@@ -162,48 +162,50 @@
             padding: 25px 5px;
         }
 
-        .catalog-grid {
-            display: grid;
-            /* Menggunakan width tetap 200px per kolom */
-            .catalog-grid {
-                display: grid;
-                /* Logic: Buat kolom minimal 150px (agar muat 2 kolom di HP kecil)
-       dan maksimal 200px (sesuai keinginan Anda).
-    */
-                grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
+        /* DEFAULT: Mobile (2 Kartu) */
+.catalog-grid {
+    display: grid;
+    /* Kita gunakan 1fr agar membagi rata lebar layar menjadi 2 bagian */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 12px;
+    padding: 12px;
+    width: 100%;
+}
 
-                gap: 12px;
-                /* Jarak antar kartu */
-                justify-content: center;
-                /* Menengahkan kartu jika ada sisa ruang */
-                padding: 15px;
-                width: 100%;
-                box-sizing: border-box;
-            }
+/* TABLET & SCREEN > 550px (3 Kartu) */
+@media (min-width: 550px) {
+    .catalog-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
 
-            gap: 15px; /* Jarak antar kartu */
-            justify-content: center; /* Menengahkan grid di dalam body 600px */
-            padding: 20px 10px;
-        }
+/* DESKTOP & SCREEN > 1020px (4 Kartu) */
+/* Catatan: Karena body Anda max-width 600px, 
+   aturan ini hanya akan terlihat jika max-width body dihapus/diperbesar */
+@media (min-width: 1020px) {
+    .catalog-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
 
 
         .catalog-item {
-            background: #fff;
-            border-radius: var(--radius);
-            overflow: hidden;
-            border: 1px solid #f1f5f9;
-            transition: transform 0.2s ease;
-            box-shadow: var(--shadow-sm);
-        }
+    width: 100%; /* Sekarang mengikuti lebar kolom grid secara otomatis */
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease;
+}
 
-        .catalog-item img {
-            width: 200px;
-            height: 250px;
-            /* Tinggi seragam */
-            object-fit: cover;
-            display: block;
-            cursor: pointer;
-        }
+.catalog-item img {
+    width: 100%;
+    height: 250px; /* Tinggi tetap sesuai permintaan Anda */
+    object-fit: cover;
+    display: block;
+}
+
 
         .catalog-item:active {
             transform: scale(0.97);

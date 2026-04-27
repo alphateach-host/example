@@ -5,303 +5,340 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <style>
-    :root {
-    --primary: #25D366;
-    --primary-dark: #1ebe5d;
-    --bg-page: #f0f2f5; /* Warna luar frame */
-    --bg-content: #ffffff; /* Warna di dalam 600px */
-    --text-main: #1e293b;
-    --text-muted: #64748b;
-    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    --radius: 16px;
-}
+:root {
+        --primary: #25D366;
+        --primary-dark: #1ebe5d;
+        --bg-page: #f0f2f5;
+        /* Warna luar frame */
+        --bg-content: #ffffff;
+        /* Warna di dalam 600px */
+        --text-main: #1e293b;
+        --text-muted: #64748b;
+        --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        --radius: 16px;
+    }
 
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-}
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-body {
-    margin: 0 auto;
-    min-height: 100vh;
-    background: var(--bg-page);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    color: var(--text-main);
-    line-height: 1.5;
-    box-shadow: 0 0 50px rgba(0,0,0,0.05);
-}
+        body {
+            margin: 0 auto;
+            min-height: 100vh;
+            background: var(--bg-page);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.5;
+            box-shadow: 0 0 50px rgba(0,0,0,0.05);
+        }
 
-/* Latar belakang browser di luar 600px */
-html {
-    background-color: var(--bg-page);
-}
-
-
-
-/* --- Header Utama --- */
-header.main-header {
-    height: 250px;
-    background: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-/* --- Container Profil --- */
-.profile-container {
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 2000;
-}
-
-/* --- Content Profil (Kunci Perbaikan di Sini) --- */
-.profile-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: transparent;
-    padding: 0; /* Default tanpa padding */
-    border-radius: 50px;
-    gap: 0;
-    transition: all 0.4s ease;
-    overflow: hidden;
-}
-
-.avatar-wrapper {
-    line-height: 0; /* Menghilangkan gap spasi teks di bawah gambar */
-    position: relative;
-}
-
-.main-avatar {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    border: 4px solid white;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    object-fit: cover;
-    display: block;
-    cursor: pointer;
-    transition: all 0.4s ease;
-}
-
-.profile-text {
-    max-height: 500px;
-    opacity: 1;
-    text-align: center;
-    padding: 10px 0;
-    transition: all 0.3s ease;
-}
-
-/* --- STATE: SAAT DI SCROLL (Menjadi Balon Murni) --- */
-.header-scrolled .profile-container {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-}
-
-.header-scrolled .profile-content {
-    background: white; /* Memberi warna saat ada teks yang muncul (expand) */
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-    flex-direction: row;
-    max-width: 50px; /* Lebar sama dengan ukuran avatar kecil */
-}
-
-.header-scrolled .main-avatar {
-    width: 50px;  /* Ukuran balon */
-    height: 50px;
-    border: 2px solid white; /* Border tipis agar terlihat elegan */
-}
-
-.header-scrolled .profile-text {
-    width: 0;
-    opacity: 0;
-    padding: 0;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-/* --- STATE: SAAT BALON DIKLIK (Expand) --- */
-.profile-container.is-expanded .profile-content {
-    max-width: 280px; /* Meluas */
-    background: white;
-}
-
-.profile-container.is-expanded .profile-text {
-    width: auto;
-    opacity: 1;
-    padding: 0 20px 0 12px; /* Memberi ruang teks saat terbuka */
-}
-
-.member-name {
-    font-size: 14px;
-    font-weight: 700;
-    margin: 0;
-    color: #1a1a1a;
-}
-
-.member-id {
-    font-size: 11px;
-    color: #64748b;
-    display: block;
-}
+        /* Latar belakang browser di luar 600px */
+        html {
+            background-color: var(--bg-page);
+        }
 
 
 
-main {
-    width: 100%;
-    padding: 25px 5px;
-}
+        /* --- Header Utama --- */
+        header.main-header {
+            height: 250px;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
 
-.catalog-grid {
-    display: grid;
-    /* Menggunakan width tetap 200px per kolom */
-    grid-template-columns: repeat(4, 200px); 
-    gap: 15px; /* Jarak antar kartu */
-    justify-content: center; /* Menengahkan grid di dalam body 600px */
-    padding: 20px 10px;
-}
+        /* --- Container Profil --- */
+        .profile-container {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+        }
+
+        /* --- Content Profil (Kunci Perbaikan di Sini) --- */
+        .profile-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: transparent;
+            padding: 0;
+            /* Default tanpa padding */
+            border-radius: 50px;
+            gap: 0;
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .avatar-wrapper {
+            line-height: 0;
+            /* Menghilangkan gap spasi teks di bawah gambar */
+            position: relative;
+        }
+
+        .main-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .profile-text {
+            max-height: 500px;
+            opacity: 1;
+            text-align: center;
+            padding: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* --- STATE: SAAT DI SCROLL (Menjadi Balon Murni) --- */
+        .header-scrolled .profile-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+        }
+
+        .header-scrolled .profile-content {
+            background: white;
+            /* Memberi warna saat ada teks yang muncul (expand) */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            flex-direction: row;
+            max-width: 50px;
+            /* Lebar sama dengan ukuran avatar kecil */
+        }
+
+        .header-scrolled .main-avatar {
+            width: 50px;
+            /* Ukuran balon */
+            height: 50px;
+            border: 2px solid white;
+            /* Border tipis agar terlihat elegan */
+        }
+
+        .header-scrolled .profile-text {
+            width: 0;
+            opacity: 0;
+            padding: 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        /* --- STATE: SAAT BALON DIKLIK (Expand) --- */
+        .profile-container.is-expanded .profile-content {
+            max-width: 280px;
+            /* Meluas */
+            background: white;
+        }
+
+        .profile-container.is-expanded .profile-text {
+            width: auto;
+            opacity: 1;
+            padding: 0 20px 0 12px;
+            /* Memberi ruang teks saat terbuka */
+        }
+
+        .member-name {
+            font-size: 14px;
+            font-weight: 700;
+            margin: 0;
+            color: #1a1a1a;
+        }
+
+        .member-id {
+            font-size: 11px;
+            color: #64748b;
+            display: block;
+        }
 
 
-.catalog-item {
-    background: #fff;
-    border-radius: var(--radius);
-    overflow: hidden;
-    border: 1px solid #f1f5f9;
-    transition: transform 0.2s ease;
-    box-shadow: var(--shadow-sm);
-}
 
-.catalog-item img {
-    width: 200px;
-    height: 250px; /* Tinggi seragam */
-    object-fit: cover;
-    display: block;
-    cursor: pointer;
-}
+        main {
+            width: 100%;
+            padding: 25px 5px;
+        }
 
-.catalog-item:active {
-    transform: scale(0.97); /* Efek membal saat ditekan */
-}
+        .catalog-grid {
+            display: grid;
+            /* Menggunakan width tetap 200px per kolom */
+            .catalog-grid {
+                display: grid;
+                /* Logic: Buat kolom minimal 150px (agar muat 2 kolom di HP kecil)
+       dan maksimal 200px (sesuai keinginan Anda).
+    */
+                grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
+
+                gap: 12px;
+                /* Jarak antar kartu */
+                justify-content: center;
+                /* Menengahkan kartu jika ada sisa ruang */
+                padding: 15px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            gap: 15px; /* Jarak antar kartu */
+            justify-content: center; /* Menengahkan grid di dalam body 600px */
+            padding: 20px 10px;
+        }
+
+
+        .catalog-item {
+            background: #fff;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid #f1f5f9;
+            transition: transform 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .catalog-item img {
+            width: 200px;
+            height: 250px;
+            /* Tinggi seragam */
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+        }
+
+        .catalog-item:active {
+            transform: scale(0.97);
+            /* Efek membal saat ditekan */
+        }
 
 
         /* Modal */
-.image-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: rgba(15, 23, 42, 0.9); /* Overlay gelap elegan */
-    backdrop-filter: blur(8px);
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
+        .image-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(15, 23, 42, 0.9);
+            /* Overlay gelap elegan */
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-.modal-box {
-    width: 100%;
-    max-width: 450px;
-    border-radius: 24px;
-    overflow: hidden;
-    background: white;
-    animation: fadeUp 0.3s ease-out;
-}
+        .modal-box {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 24px;
+            overflow: hidden;
+            background: white;
+            animation: fadeUp 0.3s ease-out;
+        }
 
-.img-container {
-    position: relative;
-    width: 100%;
-}
+        .img-container {
+            position: relative;
+            width: 100%;
+        }
 
-.modal-content {
-    width: 100%;
-    max-height: 70vh;
-    object-fit: contain; /* Gambar utuh, tidak terpotong */
-    background: #fff;
-}
+        .modal-content {
+            width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            /* Gambar utuh, tidak terpotong */
+            background: #fff;
+        }
 
-.wa-btn {
-    display: block;
-    margin: 15px;
-    padding: 16px;
-    text-align: center;
-    text-decoration: none;
-    background: var(--primary);
-    color: white;
-    font-weight: 700;
-    border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-}
+        .wa-btn {
+            display: block;
+            margin: 15px;
+            padding: 16px;
+            text-align: center;
+            text-decoration: none;
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
 
-.close-btn {
-    position: absolute;
-    top: 25px;
-    right: 25px;
-    color: white;
-    font-size: 35px;
-    z-index: 10001;
-    cursor: pointer;
-}
+        .close-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            color: white;
+            font-size: 35px;
+            z-index: 10001;
+            cursor: pointer;
+        }
 
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
 
-.footer {
-    padding: 40px 20px 60px;
-    background: #f8fafc;
-}
+        .footer {
+            padding: 40px 20px 60px;
+            background: #f8fafc;
+        }
 
-.footer-card {
-    background: white;
-    border-radius: 24px;
-    padding: 30px 20px;
-    text-align: center;
-    border: 1px solid #edf2f7;
-    box-shadow: var(--card-shadow);
-}
+        .footer-card {
+            background: white;
+            border-radius: 24px;
+            padding: 30px 20px;
+            text-align: center;
+            border: 1px solid #edf2f7;
+            box-shadow: var(--card-shadow);
+        }
 
-.footer-card h3 {
-    margin: 0 0 10px;
-    font-size: 18px;
-    color: var(--text-main);
-}
+        .footer-card h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            color: var(--text-main);
+        }
 
-.footer-card p {
-    font-size: 14px;
-    color: var(--text-muted);
-    margin-bottom: 25px;
-}
+        .footer-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
 
-.footer-wa {
-    display: block;
-    padding: 16px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: white;
-    text-decoration: none;
-    font-weight: 700;
-    border-radius: 14px;
-    transition: 0.3s;
-}
+        .footer-wa {
+            display: block;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 14px;
+            transition: 0.3s;
+        }
 
     </style>
 </head>
 <body>
 
     <header class="main-header">
-    <div class="profile-container" id="profileToggle">
-        <div class="profile-content">
-            <div class="avatar-wrapper">
-                <img src="foto-member.jpg" alt="Member" class="main-avatar">
-                <div class="verified-badge">✓</div>
-            </div>
-            <div class="profile-text">
-                <h1 class="member-name">Nama Member</h1>
-                <span class="member-id">ID MCI: 12345678</span>
+        <div class="profile-container" id="profileToggle">
+            <div class="profile-content">
+                <div class="avatar-wrapper">
+                    <img src="foto-member.jpg" alt="Member" class="main-avatar">
+                    <div class="verified-badge">
+                        ✓
+                    </div>
+                </div>
+                <div class="profile-text">
+                    <h1 class="member-name">Nama Member</h1>
+                    <span class="member-id">ID MCI: 12345678</span>
+                </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
 
 
 
@@ -422,35 +459,35 @@ main {
     <script>
         const profileToggle = document.getElementById('profileToggle');
 
-// Logic Scroll
-window.addEventListener("scroll", function () {
-    const body = document.body;
-    if (window.scrollY > 100) {
-        body.classList.add("header-scrolled");
-    } else {
-        body.classList.remove("header-scrolled");
-        profileToggle.classList.remove("is-expanded"); // Reset saat kembali ke atas
-    }
-});
-
-// Logic Klik Balon
-profileToggle.addEventListener('click', function() {
-    if (document.body.classList.contains("header-scrolled")) {
-        this.classList.toggle('is-expanded');
-    }
-});
-
-        
+        // Logic Scroll
         window.addEventListener("scroll", function () {
-    const body = document.body;
-    const scrollThreshold = 100; // Jarak scroll sebelum header berubah
+            const body = document.body;
+            if (window.scrollY > 100) {
+                body.classList.add("header-scrolled");
+            } else {
+                body.classList.remove("header-scrolled");
+                profileToggle.classList.remove("is-expanded"); // Reset saat kembali ke atas
+            }
+        });
 
-    if (window.scrollY > scrollThreshold) {
-        body.classList.add("header-scrolled");
-    } else {
-        body.classList.remove("header-scrolled");
-    }
-});
+        // Logic Klik Balon
+        profileToggle.addEventListener('click', function() {
+            if (document.body.classList.contains("header-scrolled")) {
+                this.classList.toggle('is-expanded');
+            }
+        });
+
+
+        window.addEventListener("scroll", function () {
+            const body = document.body;
+            const scrollThreshold = 100; // Jarak scroll sebelum header berubah
+
+            if (window.scrollY > scrollThreshold) {
+                body.classList.add("header-scrolled");
+            } else {
+                body.classList.remove("header-scrolled");
+            }
+        });
 
 
         const modal = document.getElementById("imageModal");
@@ -485,21 +522,21 @@ profileToggle.addEventListener('click', function() {
 
     <script>
         function centerLastRow() {
-    const grid = document.querySelector('.catalog-grid');
-    const items = document.querySelectorAll('.catalog-item');
+            const grid = document.querySelector('.catalog-grid');
+            const items = document.querySelectorAll('.catalog-item');
 
-    items.forEach(item => item.classList.remove('center-item'));
+            items.forEach(item => item.classList.remove('center-item'));
 
-    const itemWidth = 220;
-    const gap = 12;
+            const itemWidth = 220;
+            const gap = 12;
 
-    const cols = Math.floor((grid.clientWidth + gap) / (itemWidth + gap));
-    const remainder = items.length % cols;
+            const cols = Math.floor((grid.clientWidth + gap) / (itemWidth + gap));
+            const remainder = items.length % cols;
 
-    if (remainder === 1 && cols > 1) {
-        items[items.length - 1].classList.add('center-item');
-    }
-}
+            if (remainder === 1 && cols > 1) {
+                items[items.length - 1].classList.add('center-item');
+            }
+        }
     </script>
 </body>
 </html>

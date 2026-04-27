@@ -5,273 +5,305 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background: linear-gradient(
-            180deg,
-            #ffffff 0%,
-            #f7f7f7 35%,
-            #ececec 100%
-            );
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-            font-family: Arial, sans-serif;
-            color: #222;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 999;
-
-            display: flex;
-            align-items: center;
-
-            padding: 14px 12px;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(8px);
-
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-        header .logo {
-            width: 46px;
-            height: 46px;
-            object-fit: contain;
-            margin-right: 10px;
-            transition: all 0.3s ease;
-        }
-        header .member-info h1 {
-            margin: 0;
-            font-size: 16px;
-            font-weight: 600;
-            color: #111;
-            line-height: 1.2;
-            transition: all 0.3s ease;
-        }
-        header .member-info span {
-            display: block;
-            margin-top: 2px;
-            font-size: 11px;
-            color: #666;
-            transition: all 0.3s ease;
-        }
-        header.scrolled {
-            padding: 8px 12px;
-            background: rgba(255,255,255,0.82);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        header.scrolled .logo {
-            width: 34px;
-            height: 34px;
-        }
-        header.scrolled .member-info h1 {
-            font-size: 14px;
-        }
-        header.scrolled .member-info span {
-            font-size: 10px;
-        }
-
-        main {
-            width: 100%;
-            padding: 12px;
-            box-sizing: border-box;
-
-            display: flex;
-            justify-content: center;
-        }
-
-        .catalog-grid {
-            width: 100%;
-
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 180px));
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .catalog-item {
-            width: 100%;
-            max-width: 180px;
-
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-.center-item {
-    grid-column: span 2;
-    justify-self: center;
+    :root {
+    --primary: #25D366;
+    --primary-dark: #1ebe5d;
+    --bg-page: #f0f2f5; /* Warna luar frame */
+    --bg-content: #ffffff; /* Warna di dalam 600px */
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --radius: 16px;
 }
 
-        .catalog-item img {
-            width: 100%;
-            height: 260px;
-            object-fit: cover;
-            display: block;
-            cursor: pointer;
-        }
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
 
-        .catalog-item img {
-            width: 100%;
-            display: block;
-            object-fit: cover;
-            cursor: pointer;
-        }
+body {
+    margin: 0 auto;
+    min-height: 100vh;
+    background: var(--bg-page);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text-main);
+    line-height: 1.5;
+    box-shadow: 0 0 50px rgba(0,0,0,0.05);
+}
+
+/* Latar belakang browser di luar 600px */
+html {
+    background-color: var(--bg-page);
+}
+
+
+
+/* --- Header Utama --- */
+header.main-header {
+    height: 250px;
+    background: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* --- Container Profil --- */
+.profile-container {
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 2000;
+}
+
+/* --- Content Profil (Kunci Perbaikan di Sini) --- */
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    padding: 0; /* Default tanpa padding */
+    border-radius: 50px;
+    gap: 0;
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+
+.avatar-wrapper {
+    line-height: 0; /* Menghilangkan gap spasi teks di bawah gambar */
+    position: relative;
+}
+
+.main-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.profile-text {
+    max-height: 500px;
+    opacity: 1;
+    text-align: center;
+    padding: 10px 0;
+    transition: all 0.3s ease;
+}
+
+/* --- STATE: SAAT DI SCROLL (Menjadi Balon Murni) --- */
+.header-scrolled .profile-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+
+.header-scrolled .profile-content {
+    background: white; /* Memberi warna saat ada teks yang muncul (expand) */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    flex-direction: row;
+    max-width: 50px; /* Lebar sama dengan ukuran avatar kecil */
+}
+
+.header-scrolled .main-avatar {
+    width: 50px;  /* Ukuran balon */
+    height: 50px;
+    border: 2px solid white; /* Border tipis agar terlihat elegan */
+}
+
+.header-scrolled .profile-text {
+    width: 0;
+    opacity: 0;
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* --- STATE: SAAT BALON DIKLIK (Expand) --- */
+.profile-container.is-expanded .profile-content {
+    max-width: 280px; /* Meluas */
+    background: white;
+}
+
+.profile-container.is-expanded .profile-text {
+    width: auto;
+    opacity: 1;
+    padding: 0 20px 0 12px; /* Memberi ruang teks saat terbuka */
+}
+
+.member-name {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+    color: #1a1a1a;
+}
+
+.member-id {
+    font-size: 11px;
+    color: #64748b;
+    display: block;
+}
+
+
+
+main {
+    width: 100%;
+    padding: 25px 5px;
+}
+
+.catalog-grid {
+    display: grid;
+    /* Menggunakan width tetap 200px per kolom */
+    grid-template-columns: repeat(4, 200px); 
+    gap: 15px; /* Jarak antar kartu */
+    justify-content: center; /* Menengahkan grid di dalam body 600px */
+    padding: 20px 10px;
+}
+
+
+.catalog-item {
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid #f1f5f9;
+    transition: transform 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.catalog-item img {
+    width: 200px;
+    height: 250px; /* Tinggi seragam */
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+}
+
+.catalog-item:active {
+    transform: scale(0.97); /* Efek membal saat ditekan */
+}
+
 
         /* Modal */
-        .image-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
+.image-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(15, 23, 42, 0.9); /* Overlay gelap elegan */
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
 
-            background: rgba(0,0,0,0.25);
-            backdrop-filter: blur(4px);
+.modal-box {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 24px;
+    overflow: hidden;
+    background: white;
+    animation: fadeUp 0.3s ease-out;
+}
 
-            justify-content: center;
-            align-items: center;
+.img-container {
+    position: relative;
+    width: 100%;
+}
 
-            padding: 16px;
-            box-sizing: border-box;
-        }
+.modal-content {
+    width: 100%;
+    max-height: 70vh;
+    object-fit: contain; /* Gambar utuh, tidak terpotong */
+    background: #fff;
+}
 
-        .modal-box {
-            width: 90vw;
-            max-width: 380px;
-            border-radius: 16px;
-            overflow: hidden;
+.wa-btn {
+    display: block;
+    margin: 15px;
+    padding: 16px;
+    text-align: center;
+    text-decoration: none;
+    background: var(--primary);
+    color: white;
+    font-weight: 700;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
 
-            box-shadow: 0 8px 30px rgba(0,0,0,0.18);
-            animation: fadeUp 0.25s ease;
-        }
+.close-btn {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    color: white;
+    font-size: 35px;
+    z-index: 10001;
+    cursor: pointer;
+}
 
-        .img-container {
-            position: relative;
-            width: 100%;
-            height: 500px;
-            background: #fff;
-        }
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-        .modal-content {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
 
-        .wa-btn {
-            position: absolute;
-            left: 12px;
-            right: 12px;
-            bottom: 12px;
+.footer {
+    padding: 40px 20px 60px;
+    background: #f8fafc;
+}
 
-            text-align: center;
-            text-decoration: none;
+.footer-card {
+    background: white;
+    border-radius: 24px;
+    padding: 30px 20px;
+    text-align: center;
+    border: 1px solid #edf2f7;
+    box-shadow: var(--card-shadow);
+}
 
-            padding: 14px;
-            border-radius: 12px;
+.footer-card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: var(--text-main);
+}
 
-            background: rgba(37,211,102,0.88);
-            backdrop-filter: blur(8px);
+.footer-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 25px;
+}
 
-            color: white;
-            font-weight: bold;
-        }
+.footer-wa {
+    display: block;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 14px;
+    transition: 0.3s;
+}
 
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: #111;
-            font-size: 28px;
-            cursor: pointer;
-            z-index: 10000;
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px) scale(.96);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .footer {
-            padding: 24px 16px 32px;
-        }
-
-        .footer-card {
-            background: rgba(255,255,255,0.7);
-            backdrop-filter: blur(12px);
-
-            border: 1px solid rgba(255,255,255,0.6);
-            border-radius: 22px;
-
-            padding: 24px 18px;
-            text-align: center;
-
-            box-shadow:
-            0 8px 24px rgba(0,0,0,0.06),
-            inset 0 1px 0 rgba(255,255,255,0.7);
-        }
-
-        .footer-card h3 {
-            margin: 0;
-            font-size: 20px;
-            font-weight: 700;
-            color: #111;
-        }
-
-        .footer-card p {
-            margin: 10px 0 20px;
-            font-size: 14px;
-            line-height: 1.6;
-            color: #666;
-        }
-
-        /* CTA */
-        .footer-wa {
-            display: inline-block;
-            width: 100%;
-            max-width: 300px;
-
-            padding: 14px 18px;
-            box-sizing: border-box;
-
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-
-            color: white;
-            border-radius: 14px;
-
-            background: linear-gradient(135deg, #25D366, #1ebe5d);
-
-            box-shadow: 0 8px 18px rgba(37,211,102,0.28);
-        }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <img src="logo.png" alt="Logo" class="logo">
-
-        <div class="member-info">
-            <h1>Nama Member</h1>
-            <span>ID MCI: 12345678</span>
+    <header class="main-header">
+    <div class="profile-container" id="profileToggle">
+        <div class="profile-content">
+            <div class="avatar-wrapper">
+                <img src="foto-member.jpg" alt="Member" class="main-avatar">
+                <div class="verified-badge">✓</div>
+            </div>
+            <div class="profile-text">
+                <h1 class="member-name">Nama Member</h1>
+                <span class="member-id">ID MCI: 12345678</span>
+            </div>
         </div>
-    </header>
+    </div>
+</header>
+
+
 
     <main>
         <section class="catalog-grid">
@@ -388,15 +420,38 @@
     </footer>
 
     <script>
-        window.addEventListener("scroll", function () {
-            const header = document.querySelector("header");
+        const profileToggle = document.getElementById('profileToggle');
 
-            if (window.scrollY > 30) {
-                header.classList.add("scrolled");
-            } else {
-                header.classList.remove("scrolled");
-            }
-        });
+// Logic Scroll
+window.addEventListener("scroll", function () {
+    const body = document.body;
+    if (window.scrollY > 100) {
+        body.classList.add("header-scrolled");
+    } else {
+        body.classList.remove("header-scrolled");
+        profileToggle.classList.remove("is-expanded"); // Reset saat kembali ke atas
+    }
+});
+
+// Logic Klik Balon
+profileToggle.addEventListener('click', function() {
+    if (document.body.classList.contains("header-scrolled")) {
+        this.classList.toggle('is-expanded');
+    }
+});
+
+        
+        window.addEventListener("scroll", function () {
+    const body = document.body;
+    const scrollThreshold = 100; // Jarak scroll sebelum header berubah
+
+    if (window.scrollY > scrollThreshold) {
+        body.classList.add("header-scrolled");
+    } else {
+        body.classList.remove("header-scrolled");
+    }
+});
+
 
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("modalImg");
